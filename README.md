@@ -1,278 +1,96 @@
-# Api BakcEnd Forum Hub
+# Fórum Hub - Challenge Alura
 
-<p align="center">
-   <img src="https://img.shields.io/badge/ STATUS-LANÇADO (desenvolvido)-brightgreen"/>
-</p>
-<p align="center">
-   <img src="https://img.shields.io/badge/ STATUS-VERSÃO 2.5-brightgreen"/>
-</p>
+![Status](https://img.shields.io/badge/status-concluído-brightgreen)
+![Java](https://img.shields.io/badge/Java-17-blue)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3-green)
 
-> Escrito em `JAVA 17`.
+## 📖 Sobre o Projeto
 
-&nbsp;
-## Introdução
+O **Fórum Hub** é uma API REST completa e funcional desenvolvida como solução para o Challenge do programa Oracle Next Education (ONE) em parceria com a Alura. A aplicação simula um fórum de discussão, permitindo que usuários criem, leiam, atualizem e deletem tópicos, garantindo a segurança das rotas com autenticação e autorização.
 
-<p align="justify">
+Este projeto foi construído para aplicar e solidificar os conhecimentos em desenvolvimento back-end com **Java e Spring Boot**, seguindo as melhores práticas de mercado, como arquitetura RESTful, validações, tratamento de erros e segurança.
 
-Bem-vindo à documentação da aplicação `Forum Hub`.
+## 🚀 Funcionalidades Principais
 
-Uma ferramenta para gerenciamento de `fóruns`, permitindo a `criação e gerenciamento` de `usuários, tópicos e respostas`, desenvolvida por [Wesley Pereira](https://github.com/wesleyp846).
+-   **Autenticação e Autorização:** Controle de acesso via tokens JWT (JSON Web Tokens). Endpoints protegidos que exigem autenticação.
+-   **CRUD Completo de Tópicos:**
+    -   `POST /topicos`: Criação de um novo tópico (requer autenticação).
+    -   `GET /topicos`: Listagem de todos os tópicos.
+    -   `GET /topicos/{id}`: Detalhamento de um tópico específico.
+    -   `PUT /topicos/{id}`: Atualização de um tópico existente (requer autenticação e autorização do autor).
+    -   `DELETE /topicos/{id}`: Exclusão de um tópico (requer autenticação e autorização do autor).
+-   **Validações:** Validações de dados de entrada conforme as regras de negócio (ex: não permitir tópicos duplicados).
+-   **Banco de Dados:** Persistência de dados utilizando o Spring Data JPA.
+-   **Migrações:** Gerenciamento e versionamento do schema do banco de dados com Flyway.
+-   **Documentação:** Documentação interativa dos endpoints com Swagger (OpenAPI).
 
-Esta aplicação foi criada no contexto da bolsa do curso da [Oracle](https://www.oracle.com/br/), [Alura](https://www.alura.com.br/) e [Ifood](https://www.ifood.com.br/), com foco em `BackEnders iniciantes`.
+## 🛠️ Tecnologias Utilizadas
 
-A aplicação é escrita `exclusivamente` em [JAVA](https://docs.oracle.com/en/java/javase/17/docs/api/), utilizando o framework [Spring Boot](https://spring.io/projects/spring-boot) e em sua versão 2.5 traz suporte `implemantação` em [Docker](https://www.docker.com/).
+Abaixo estão as principais tecnologias e ferramentas usadas na construção da API:
 
+-   **Linguagem:** Java 17
+-   **Framework:** Spring Boot 3
+-   **Segurança:** Spring Security, JWT (JSON Web Token)
+-   **Persistência:** Spring Data JPA / Hibernate
+-   **Banco de Dados:** MySQL (ou H2 para ambiente de teste)
+-   **Gerenciador de Dependências:** Maven
+-   **Migrações de Banco:** Flyway
+-   **Documentação:** SpringDoc (Swagger/OpenAPI)
+-   **Utilitários:** Lombok
 
-Para implementação direto do `DOCKER HUB`, cole em seu terminal:
+## 📄 Documentação da API
 
-      sudo docker pull wesleyp846/forum_hub:V2.5
-      sudo docker run -d -p 8080:8080 wesleyp846/forum_hub:V2.5
+A documentação completa de todos os endpoints disponíveis, incluindo modelos de `request` e `response`, pode ser acessada de forma interativa através do Swagger UI.
 
-</p>
+Após iniciar a aplicação, acesse a seguinte URL no seu navegador:
+[http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
 
-&nbsp;
-&nbsp;
-## Versão Atual: 2.5
-&nbsp;
-Na versão 2.5, a aplicacação foi `finalizada`, `Dockerizada` e `entregue`.
+## ⚙️ Como Executar o Projeto
 
-&nbsp;
-&nbsp;
-> ### Pré-requisitos
-&nbsp;
-* Acesso à `WEB`.
-* `Doker`
-* `Java 17` instalado (opicional).
-* `Intellij IDEA` instalado (opicional).
-* `Maven` configurado (opicional).
+Siga os passos abaixo para rodar o projeto em seu ambiente local.
 
-&nbsp;
-&nbsp;
-> ### Tecnologias Utilizadas
-&nbsp;
+### Pré-requisitos
 
-[JAVA](https://www.oracle.com/java/technologies/downloads/#java22): Usado como linguagem de programação.
+-   JDK 17 ou superior
+-   Maven 3.8 ou superior
+-   Git
+-   Um cliente de API (Postman, Insomnia, etc.)
+-   MySQL (ou outro banco de dados relacional de sua preferência)
 
-[Spring Boot](https://spring.io/projects/spring-boot): Usado como framework para construção da aplicação.
+### Passo a Passo
 
-[Intellij](https://www.jetbrains.com/pt-br/idea/): Usado como IDE na codificação.
+1.  **Clone o repositório:**
+    ```bash
+    git clone [https://github.com/seu-usuario/meu-forum-hub.git](https://github.com/seu-usuario/meu-forum-hub.git)
+    cd meu-forum-hub
+    ```
 
-[Postgresql](https://www.postgresql.org/download): Usado como banco de dados em memória para desenvolvimento.
+2.  **Configure o Banco de Dados:**
+    -   Abra o arquivo `src/main/resources/application.properties`.
+    -   Altere as propriedades `spring.datasource.url`, `spring.datasource.username` e `spring.datasource.password` com as credenciais do seu banco de dados local.
+    ```properties
+    spring.datasource.url=jdbc:mysql://localhost:3306/forumhub
+    spring.datasource.username=seu_usuario_mysql
+    spring.datasource.password=sua_senha_mysql
+    ```
 
-[Docker](https://www.docker.com/): Usado na conteinerização da aplicação como um todo.
+3.  **Execute a aplicação:**
+    -   Você pode executar a aplicação diretamente pela sua IDE (Eclipse, IntelliJ) ou pelo terminal usando o Maven.
+    ```bash
+    mvn spring-boot:run
+    ```
 
-&nbsp;
-&nbsp;
-> ### Funcionalidades
-&nbsp;
+4.  **Acesse os endpoints:**
+    -   A API estará disponível em `http://localhost:8080`.
+    -   Use o Postman ou similar para testar os endpoints, como `POST /login` para obter um token e `GET /topicos` para listar os tópicos.
 
+## ✒️ Autor
 
-1. A aplicação permite a `criação e gerenciamento de usuários`.
-2. Os `tópicos` podem ser `criados, editados, listados e deletados`.
-3. As `respostas` aos tópicos podem ser `criadas, editadas, listadas e deletadas`.
-4. A `autenticação` dos usuários é gerenciada por meio de `tokens JWT`.
-5. Como o `Docker` instalado é possível clonar o [repositório](https://github.com/wesleyp846/ForumHub) e com comando simples via `terminal`, rodar a aplicação` 
+Projeto desenvolvido por **[Seu Nome Completo]**.
 
-&nbsp;
-&nbsp;
-> ### Endpoints da API
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/seu-usuario-linkedin/)
+[![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/seu-usuario/)
 
-#### Usuario Controller
+## 🙏 Agradecimentos
 
-- **PUT /usuarios/{id}**
-  - Atualiza um usuário específico.
-
-- **DELETE /usuarios/{id}**
-  - Deleta um usuário específico.
-
-- **GET /usuarios**
-  - Lista todos os usuários.
-
-- **POST /usuarios**
-  - Cria um novo usuário.
-
-#### Topico Controller
-
-- **GET /topicos/{id}**
-  - Retorna detalhes de um tópico específico.
-
-- **PUT /topicos/{id}**
-  - Atualiza um tópico específico.
-
-- **DELETE /topicos/{id}**
-  - Deleta um tópico específico.
-
-- **GET /topicos**
-  - Lista todos os tópicos.
-
-- **POST /topicos**
-  - Cria um novo tópico.
-
-#### Resposta Controller
-
-- **PUT /respostas/{id}**
-  - Atualiza uma resposta específica.
-
-- **POST /respostas/{id}**
-  - Cria uma nova resposta.
-
-- **DELETE /respostas/{id}**
-  - Deleta uma resposta específica.
-
-- **GET /respostas**
-  - Lista todas as respostas.
-
-#### Auth Controller
-
-- **POST /login**
-  - Autentica um usuário.(`Usuario deve estar previamente cadastrado no banco de dados com e-mail e senha`)
-
-&nbsp;
-&nbsp;
-> ### Modelos de Dados (Schemas)
-
-- **DadosEdicaoDeUsuarioDto**: Dados para edição de um usuário.
-- **EditarTopicoDto**: Dados para edição de um tópico.
-- **RespostaEditaTopicoDTO**: Dados para edição de uma resposta.
-- **EditarRespostaDto**: Dados para edição de uma resposta.
-- **DadosNovoUsuarioDto**: Dados para criação de um novo usuário.
-- **DadosNovoTopicoDto**: Dados para criação de um novo tópico.
-- **DtoDadosNovaResposta**: Dados para criação de uma nova resposta.
-- **EnvioAutenticacaoDTO**: Dados para autenticação de um usuário.
-- **Pageable**: Dados para paginação.
-- **ListagemDeDadosUsuariosDto**: Dados de listagem de usuários.
-- **PageListagemDeDadosUsuariosDto**: Dados de paginação de listagem de usuários.
-- **PageableObject**: Objeto de paginação.
-- **SortObject**: Objeto de ordenação.
-- **ListagemDeDadosTopicosDto**: Dados de listagem de tópicos.
-- **PageListagemDeDadosTopicosDto**: Dados de paginação de listagem de tópicos.
-- **UsuarioSimplesDTO**: Dados simplificados de um usuário.
-- **DetalhesRespostaDTO**: Detalhes de uma resposta.
-- **PageDetalhesRespostaDTO**: Dados de paginação de detalhes de respostas.
-
-&nbsp;
-&nbsp;
-
-> ### Configuração via DOCKER
-
->> Clone do repositório
-
-      git clone https://github.com/wesleyp846/ForumHub
-
->> Navegue até a pasta do app
-
-      cd ForumHub
-
->> Compile a aplicação
-
-      sudo docker-compose build
-
->> Rode a aplicação
-
-      sudo docker-compose up
-
-&nbsp;
-&nbsp;
-> ### Configuração
-
-Para rodar este projeto, siga os passos abaixo:
-
-1. **Clone o repositório:**
-   ```sh
-   git clone https://github.com/wesleyp846/ForumHub
-   cd ForumHub
-
-Configure o banco de dados:
-Atualize as configurações do banco de dados no arquivo `application.properties`.
-
-Execute a aplicação:
-
-
-      ./mvnw spring-boot:run
-
-Acesse a documentação da API:
-A documentação da API gerada pelo Swagger pode ser acessada em 
-
-      http://localhost:8080/swagger-ui/index.html#/
-
-
-#### Contribuição
-Para contribuir com o projeto, siga os passos abaixo:
-
-Fork o repositório.
-Crie uma nova branch:
-
-      git checkout -b minha-feature
-      
-Faça suas alterações e commit:
-
-      git commit -m "Minha nova feature"
-
-Envie para o repositório remoto:
-
-      git push origin minha-feature
-
-Abra um Pull Request.
-
-&nbsp;
-&nbsp; 
-
->Licença
-MIT
-
-&nbsp;
-&nbsp;
-
-> ### Créditos
-Baseado em orientação da [Alura](https://www.alura.com.br/) e seus `professores`, com `live` única de lançamento do exercício.
-
-&nbsp;
-
-Esperamos que esta documentação ajude você a compreender a aplicação.
-
-Fique à vontade para contribuir e adicionar melhorias ao código.
-
-Para mais informações, visite o LinkedIn de [Wesley Pereira](https://www.linkedin.com/in/wesleyp846).
-
-Primeiro commit na data de 29/06/2024
-
-&nbsp;
-&nbsp;
-
-### Demonstrativos:
-
-
-> Demonstração da API rodando em terminal no servidor
-
-![Demonstração da API rodando em terminal no servidor](https://github.com/wesleyp846/ForumHub/blob/main/img/imagemDoTerminal.png)
-
-&nbsp;
-&nbsp;
-
-> Demonstração dos retornos da API via Insomnia
-
-![Demonstração da API rodando em requisições backend](https://github.com/wesleyp846/ForumHub/blob/main/img/ExemploDeRespostaDaAPI.png)
-
-&nbsp;
-&nbsp;
-
-
-> Demonstração da documentação adicioal SWAGGER
-
-![Demonstração da documentação Swagger adicinal da API](https://github.com/wesleyp846/ForumHub/blob/main/img/TelaDocumentacaoSwagger.png)
-
-&nbsp;
-&nbsp;
-
-
-> Demonstação das tabelas no Banco de Dados
-
-![Demonstração do banco de dados da API](https://github.com/wesleyp846/ForumHub/blob/main/img/TabelasNoDB.png)
-
-&nbsp;
-&nbsp;
-
-
-> Demonstração da estrutura de arquivos do codigo fonte
-
-![Demonstração da estrutura de arquivos](https://github.com/wesleyp846/ForumHub/blob/main/img/EstruturaDeArquivos.png)
+Agradeço à **Alura** e à **Oracle** pelo desafio proposto no programa ONE, que proporcionou uma excelente oportunidade para aplicar e aprimorar minhas habilidades em desenvolvimento back-end.
